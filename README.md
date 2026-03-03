@@ -36,19 +36,6 @@ mvn clean package
 java -cp target/web-framework.jar com.tdse.framework.appexamples.MathServices
 ```
 
-## Usage
-
-```java
-public static void main(String[] args) throws IOException, URISyntaxException {
-    staticfiles("webroot/public");
-
-    get("/App/hello", (req, res) -> "Hello " + req.getValues("name") + "!");
-    get("/App/pi",    (req, res) -> "PI = " + Math.PI);
-
-    HttpServer.start(35000);
-}
-```
-
 ## Test Endpoints
 
 | URL | Response |
@@ -63,13 +50,6 @@ public static void main(String[] args) throws IOException, URISyntaxException {
 
 ```bash
 mvn test
-```
-
-### Test Evidence
-
-```
-[INFO] Tests run: 19, Failures: 0, Errors: 0, Skipped: 0
-[INFO] BUILD SUCCESS
 ```
 
 Key tests:
