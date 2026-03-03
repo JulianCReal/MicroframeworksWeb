@@ -41,10 +41,11 @@ java -cp target/web-framework.jar com.tdse.framework.appexamples.MathServices
 | URL | Response |
 |-----|----------|
 | `http://localhost:35000/index.html` | Static HTML page |
-| `http://localhost:35000/App/hello?name=Pedro` | `Hello Pedro!` |
-| `http://localhost:35000/App/pi` | `PI = 3.141592653589793` |
-| `http://localhost:35000/App/sqrt?value=144` | `sqrt(144.0) = 12.0` |
-| `http://localhost:35000/notfound` | `404 Not Found` |
+| `http://localhost:35000/init` | `Hello World` |
+| `http://localhost:35000/hello?name=Pedro&lastname=Perez` | `Hello to: Pedro Perez` |
+| `http://localhost:35000/pi` | `PI = 3.141592653589793` |
+| `http://localhost:35000/api/name?name=Pedro&age=25` | `My name is: Pedro And my age is: 25` |
+| `http://localhost:35000/api/pi` | `The value of Pi is = 3.141592653589793` |
 
 ## Running Tests
 
