@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Framework Demo</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 40px auto; padding: 20px; background: #f5f5f5; }
+        h1 { color: #2c3e50; }
+        h2 { color: #34495e; margin-top: 30px; }
+        .endpoint { background: #fff; border-left: 4px solid #3498db; padding: 12px 16px; margin: 10px 0; border-radius: 4px; }
+        a { color: #2980b9; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        code { background: #ecf0f1; padding: 2px 6px; border-radius: 3px; font-family: monospace; }
+        input[type="text"] { padding: 6px; border: 1px solid #bdc3c7; border-radius: 4px; width: 150px; }
+        button { padding: 6px 14px; background: #3498db; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        button:hover { background: #2980b9; }
+        .result { margin-top: 8px; padding: 8px; background: #eafaf1; border-radius: 4px; display: none; font-family: monospace; }
+    </style>
+</head>
+<body>
+
+<h1>🌐 Web Framework - REST Services Demo</h1>
+<p>Static file served from <code>webroot/public/index.html</code>.</p>
+
+<h2>Endpoints</h2>
+
+<div class="endpoint">
+    <strong>GET /init</strong> — Hello World &nbsp;
+    <a href="/init" target="_blank">→ Open</a>
+</div>
+
+<div class="endpoint">
+    <strong>GET /hello?name=&amp;lastname=</strong>
+    <br><br>
+    <input type="text" id="name" placeholder="Pedro" />
+    <input type="text" id="lastname" placeholder="Perez" />
+    <button onclick="call('/hello?name='+name.value+'&lastname='+lastname.value,'r1')">Try it</button>
+    <div class="result" id="r1"></div>
+</div>
+
+<div class="endpoint">
+    <strong>GET /pi</strong> &nbsp;
+    <a href="/pi" target="_blank">→ Open</a>
+</div>
+
+<div class="endpoint">
+    <strong>GET /api/name?name=&amp;age=</strong>
+    <br><br>
+    <input type="text" id="aname" placeholder="Pedro" />
+    <input type="text" id="age" placeholder="25" />
+    <button onclick="call('/api/name?name='+aname.value+'&age='+age.value,'r2')">Try it</button>
+    <div class="result" id="r2"></div>
+</div>
+
+<div class="endpoint">
+    <strong>GET /api/pi</strong> &nbsp;
+    <a href="/api/pi" target="_blank">→ Open</a>
+</div>
+
+<script>
+    function call(url, resultId) {
+        fetch(url).then(r => r.text()).then(html => {
+            const match = html.match(/<body>([\s\S]*?)<\/body>/);
+            const div = document.getElementById(resultId);
+            div.style.display = 'block';
+            div.textContent = match ? match[1].replace(/<[^>]+>/g, '').trim() : html;
+        });
+    }
+</script>
+</body>
+</html>
