@@ -13,36 +13,30 @@ import static com.tdse.framework.utilities.HttpServer.staticfiles;
  *
  * Endpoints:
  *  - http://localhost:35000/index.html
- *  - http://localhost:35000/App/hello?name=Pedro
- *  - http://localhost:35000/App/pi
- *  - http://localhost:35000/App/sqrt?value=144
+ *  - http://localhost:35000/init
+ *  - http://localhost:35000/hello?name=Pedro&lastname=Perez
+ *  - http://localhost:35000/pi
+ *  - http://localhost:35000/api/name?name=Pedro&age=25
+ *  - http://localhost:35000/api/pi
  */
 public class MathServices {
 
     public static void main(String[] args) throws IOException, URISyntaxException {
 
-        // Serve static files from target/classes/webroot/public
         staticfiles("webroot/public");
 
-        // REST endpoints using lambda functions
-        get("/App/hello", (req, res) -> {
-            String name = req.getValues("name");
-            return name.isEmpty() ? "Hello, World!" : "Hello " + name + "!";
-        });
+        get("/init", (req, res) -> "Hello World");
 
-        get("/App/pi", (req, res) -> "PI = " + Math.PI);
+        get("/hello", (req, res) ->
+                "Hello to: " + req.getValues("name") + " " + req.getValues("lastname"));
 
-        get("/App/sqrt", (req, res) -> {
-            String valueStr = req.getValues("value");
-            try {
-                double val = Double.parseDouble(valueStr);
-                return "sqrt(" + val + ") = " + Math.sqrt(val);
-            } catch (NumberFormatException e) {
-                return "Please provide a valid number: ?value=<number>";
-            }
-        });
+        get("/pi", (req, res) -> "PI = " + Math.PI);
 
-        // Start the server on port 35000
+        get("/api/name", (req, res) ->
+                "My name is: " + req.getValues("name") + " And my age is: " + req.getValues("age"));
+
+        get("/api/pi", (req, res) -> "The value of Pi is = " + Math.PI);
+
         HttpServer.start(35000);
     }
 }
